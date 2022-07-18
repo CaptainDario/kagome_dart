@@ -33,7 +33,20 @@ dependencies:
 ```
 
 now create a `blobs`-folder at the root of your project.
-Afterwards, copy the kagome binaries from the [release section]() (or build yourself ) to this folder.
+Afterwards, copy the kagome binaries from the [release section](https://github.com/CaptainDario/kagome_dart/releases/tag/binaries) (or [build yourself](#compiling-kagome-yourself)) to this folder.
+
+Now the framework needs to know to include the libraries while build for that some additional configuartion for each platform is requried.
+
+### Windows
+
+Open CMakeLists.txt and at the end add
+
+``` CMake
+install(
+  FILES ${PROJECT_BUILD_DIR}/../blobs/libkagome_win.dll 
+  DESTINATION ${INSTALL_BUNDLE_DATA_DIR}/../blobs/
+)
+```
 
 ## Usage
 
@@ -75,6 +88,8 @@ void main() {
 ```
 
 ## Compiling kagome yourself
+
+This could be helpful if you want to use a different dictionary.
 
 ### Windows
 
