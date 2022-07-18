@@ -1,3 +1,5 @@
+# Kagome dart
+
 A **simple** dart binding to [kagome](https://github.com/ikawaha/kagome).
 
 ## Features
@@ -12,7 +14,6 @@ platform support:
 | Linux    |          |
 | iOS      |          |
 | Android  |          |
-
 
 ## Getting started
 
