@@ -19,12 +19,12 @@ void main() {
   }
 
   // analyze and create spaces
-  Tuple2<List<String>, List<String>> t = runAnalyzer(input, analyzeModes.search);
+  Tuple2<List<String>, List<String>> t = runAnalyzer(input, AnalyzeModes.search);
   for (var i = 0; i < t.item1.length; i++) {
     print("${t.item1[i]} \t ${t.item2[i]}");
   }
   
-  t = runAnalyzer(input, analyzeModes.normal);
+  t = runAnalyzer(input, AnalyzeModes.normal);
   print(t);
 
   destroyTokenizer();

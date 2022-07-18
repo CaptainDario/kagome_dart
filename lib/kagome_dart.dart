@@ -37,7 +37,7 @@ final DynamicLibrary kagomeDartLib = () {
 DynamicLibrary _lib = DynamicLibrary.open('blobs/libkagome.dll');
 
 // enums
-enum analyzeModes {
+enum AnalyzeModes {
   normal, search, extended
 } 
 
@@ -93,7 +93,7 @@ typedef RunAnalyzer_func =
 final RunAnalyzer _runAnalyzer =
   _lib.lookup<ffi.NativeFunction<RunAnalyzer_func>>('RunAnalyzer').asFunction();
 /// Runs kagome's analyzer on the given `inpuText` and returns the result
-Tuple2<List<String>, List<String>> runAnalyzer(String inputText, analyzeModes mode) {
+Tuple2<List<String>, List<String>> runAnalyzer(String inputText, AnalyzeModes mode) {
 
   inputText = _sanitizeInput(inputText);
 
