@@ -23,15 +23,56 @@ First clone this repo
 git clone https://github.com/CaptainDario/kagome_dart
 ```
 
-then clone kagome inside of this repo
+and add it to your `pubspec.yaml`
 
-``` bash
-git clone https://github.com/ikawaha/kagome
+``` yaml
+...
+
+dependencies:
+  kagome_dart: 1.0.0
 ```
+
+now create a `blobs`-folder at the root of your project.
+Afterwards, copy the kagome binaries from the [release section]() (or build yourself ) to this folder.
 
 ## Usage
 
 Usage of this package is fairly simpe as it only provides the two top level function `analyze` and `wakati` from kagome.
+
+``` dart
+
+import 'package:kagome_dart/kagome_dart.dart';
+
+import 'package:tuple/tuple.dart';
+
+
+
+void main() {
+
+  String input = "日本経済新聞";
+  showVersion();
+
+  // important to call before any other methods
+  initTokenizer();
+
+  // create spaces in input
+  List w = runWakati(input);
+  for (var i = 0; i < w.length; i++) {
+    print(w[i]);
+  }
+
+  // analyze and create spaces
+  Tuple2<List<String>, List<String>> t = runAnalyzer(input, analyzeModes.search);
+  for (var i = 0; i < t.item1.length; i++) {
+    print("${t.item1[i]} \t ${t.item2[i]}");
+  }
+  
+  t = runAnalyzer(input, analyzeModes.normal);
+  print(t);
+
+  destroyTokenizer();
+}
+```
 
 ## Compiling kagome yourself
 
