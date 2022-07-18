@@ -7,7 +7,7 @@ import 'package:ffi/src/utf8.dart';
 
 
 // Load dynamic library 
-final DynamicLibrary kagomeDartLib = () {
+final DynamicLibrary _lib = () {
   if (Platform.isAndroid) {
     return DynamicLibrary.open('libkagome_droid.so');
   }
@@ -34,7 +34,6 @@ final DynamicLibrary kagomeDartLib = () {
     throw UnsupportedError('Unsupported platform!');
   }
 }();
-DynamicLibrary _lib = DynamicLibrary.open('blobs/libkagome.dll');
 
 // enums
 enum AnalyzeModes {
