@@ -9,7 +9,7 @@ import 'package:ffi/src/utf8.dart';
 // Load dynamic library 
 final DynamicLibrary kagomeDartLib = () {
   if (Platform.isAndroid) {
-    return DynamicLibrary.open('libmecab.so');
+    return DynamicLibrary.open('libkagome_droid.so');
   }
   else if (Platform.isIOS) {
     return DynamicLibrary.process();
@@ -17,17 +17,17 @@ final DynamicLibrary kagomeDartLib = () {
   else if (Platform.isMacOS) {
 
     return DynamicLibrary.open(
-      "${Directory(Platform.resolvedExecutable).parent.path}/blobs/libkagome.dylib"
+      "${Directory(Platform.resolvedExecutable).parent.path}/blobs/libkagome_mac.dylib"
     );
   }
   else if (Platform.isLinux) {
     return DynamicLibrary.open(
-      "${Directory(Platform.resolvedExecutable).parent.path}/blobs/libkagome.so"
+      "${Directory(Platform.resolvedExecutable).parent.path}/blobs/libkagome_lin.so"
     );
   }
   else if (Platform.isWindows) {
     return DynamicLibrary.open(
-      "${Directory(Platform.resolvedExecutable).parent.path}/blobs/libkagome.dll"
+      "${Directory(Platform.resolvedExecutable).parent.path}/blobs/libkagome_win.dll"
     );
   }
   else {
