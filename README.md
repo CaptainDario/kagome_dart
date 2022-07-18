@@ -103,3 +103,5 @@ go.exe build -o libkagome.dll -buildmode=c-shared kagome.go
 
 This would obviously not be possible without [kagome](https://github.com/ikawaha/kagome) so please take a look at this project.
 If you want to see this package used in a larger project, take a look at [DaKanji](https://github.com/CaptainDario/DaKanji).
+
+NOTE: The character █ is not supported as input.
