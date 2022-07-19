@@ -7,13 +7,9 @@ A **simple** dart binding to [kagome](https://github.com/ikawaha/kagome).
 This package enables the use of kagome from dart.
 
 platform support:
-| platform | supported |
-| -------- | -------- |
-| Windows  |    ✅    |
-| MacOS    |          |
-| Linux    |          |
-| iOS      |          |
-| Android  |          |
+| Windows | MacOS | Linux | iOS | Android | web |
+| :------: | :------: | :------: | :------: | :------: | :------: |
+|     ✅  |        |       |        |       |    see https://github.com/CaptainDario/kagome_dart/issues/1    |
 
 ## Getting started
 
