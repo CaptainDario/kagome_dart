@@ -84,7 +84,7 @@ void main() {
 ```
 
 ## Compiling kagome yourself
-**Note for windows user** I had to uses Msys2 and MinGW to compile the go source to a `.dll` on windows.
+**Note for windows user,** use Msys2 and MinGW to compile the go source to a dynamic library on Windows.
 
 This could be helpful if you want to use a different dictionary.
 First you need to clone the kagome repo to have access to the source.
