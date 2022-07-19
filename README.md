@@ -88,6 +88,7 @@ void main() {
 ```
 
 ## Compiling kagome yourself
+**Note for windows user** I had to uses Msys2 and MinGW to compile the go source to a `.dll` on windows.
 
 This could be helpful if you want to use a different dictionary.
 First you need to clone the kagome repo to have access to the source.
@@ -98,12 +99,19 @@ git clone https://github.com/ikawaha/kagome
 
 Then copy the overwrite kagome's `kagome.go` with the `kagome.go` of this repository.
 
-### Compiling on Windows
+Cross compiling is easily possible with go, by just setting environment variables.
+The supported platforms can be seen by calling `go.exe tool dist list`
 
-I had to uses Msys2 and MinGW to compile the go source to a `.dll` on windows.
+Now only the environment variables must be set
 
 ``` bash
-go.exe build -o libkagome.dll -buildmode=c-shared kagome.go
+env GOOS=<YOUR SELECTION> GOARCH=<GOARCH>
+```
+
+Then build your lib by calling:
+
+``` bash
+go build -o libkagome<your_extension> -buildmode=c-shared kagome.go
 ```
 
 ## Additional information
