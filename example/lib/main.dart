@@ -19,7 +19,8 @@ void main() {
   }
 
   // analyze and create spaces
-  Tuple2<List<String>, List<String>> t = runAnalyzer(input, AnalyzeModes.search);
+  Tuple2<List<String>, List<List<String>>> t = 
+    runAnalyzer(input, AnalyzeModes.search);
   for (var i = 0; i < t.item1.length; i++) {
     print("${t.item1[i]} \t ${t.item2[i]}");
   }

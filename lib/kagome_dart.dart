@@ -92,7 +92,8 @@ typedef RunAnalyzer_func =
 final RunAnalyzer _runAnalyzer =
   _lib.lookup<ffi.NativeFunction<RunAnalyzer_func>>('RunAnalyzer').asFunction();
 /// Runs kagome's analyzer on the given `inpuText` and returns the result
-Tuple2<List<String>, List<String>> runAnalyzer(String inputText, AnalyzeModes mode) {
+Tuple2<List<String>, List<List<String>>>
+  runAnalyzer(String inputText, AnalyzeModes mode) {
 
   inputText = _sanitizeInput(inputText);
 
@@ -101,6 +102,15 @@ Tuple2<List<String>, List<String>> runAnalyzer(String inputText, AnalyzeModes mo
     mode.toString().split('.').last.toNativeUtf8()
   ).toDartString();
 
-  var s = analyzerOut.split("██");
-  return Tuple2(s[0].split("█"), s[1].split("█"));
+  var s = analyzerOut.split("███");
+  var s_1 = s[1].split("██");
+
+  var ret = Tuple2(
+    s[0].split("██"),
+    List.generate(s_1.length,
+      (index) => s_1[index].split("█")
+    )
+  );
+
+  return ret;
 }
