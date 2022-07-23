@@ -173,5 +173,6 @@ go build -o libkagome_droid_$GOARCH.so -buildmode=c-shared kagome.go
 
 This would obviously not be possible without [kagome](https://github.com/ikawaha/kagome) so please take a look at this project.
 If you want to see this package used in a larger project, take a look at [DaKanji](https://github.com/CaptainDario/DaKanji).
+Also thanks to [Roger Chapman for his guide](https://rogchap.com/2020/09/14/running-go-code-on-ios-and-android/) on how to cross compile for android and iOS.
 
 NOTE: The character █ is not supported as input.
