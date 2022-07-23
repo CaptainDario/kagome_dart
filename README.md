@@ -9,7 +9,7 @@ This package enables the use of kagome from dart.
 platform support:
 | Windows | MacOS | Linux | iOS | Android | web |
 | :------: | :------: | :------: | :------: | :------: | :------: |
-|     ✅  |        |       |        |       |    see https://github.com/CaptainDario/kagome_dart/issues/1    |
+|     ✅  |        |       |        |   ✅   |    see https://github.com/CaptainDario/kagome_dart/issues/1    |
 
 ## Getting started
 
@@ -35,7 +35,7 @@ Now the framework needs to know to include the libraries while build for that so
 
 ### Windows
 
-Open CMakeLists.txt and at the end add
+Open CMakeLists.txt and at the end, add
 
 ``` CMake
 install(
@@ -43,6 +43,18 @@ install(
   DESTINATION ${INSTALL_BUNDLE_DATA_DIR}/../blobs/
 )
 ```
+
+### Android
+
+Copy and rename the android libraries to the matching folder in `android/app/src/main/jniLibs`
+
+`libkagome_droid_386.so` -> `x86/libkagome_droid.so`,
+
+`libkagome_droid_amd64.so` -> `x86_64/libkagome_droid.so`,
+
+`libkagome_droid_arm.so` -> `armeabi-v7a/libkagome_droid.so`,
+
+`libkagome_droid_arm64.so` -> `arm64-v8a/libkagome_droid.so`
 
 ## Usage
 
@@ -85,8 +97,6 @@ void main() {
 
 ## Compiling kagome yourself
 
-**Note for windows user,** use Msys2 and MinGW to compile the go source to a dynamic library on Windows.
-
 This could be helpful if you want to use a different dictionary.
 First you need to clone the kagome repo to have access to the source.
 
@@ -96,19 +106,67 @@ git clone https://github.com/ikawaha/kagome
 
 Then copy the overwrite kagome's `kagome.go` with the `kagome.go` of this repository.
 
-Cross compiling is easily possible with go, by just setting environment variables.
+Cross compiling is possible with go, by setting some environment variables.
 The supported platforms can be seen by calling `go.exe tool dist list`
 
-Now only the environment variables must be set
+### Compile for Windows
+
+**Note:** I only had success building on Windows using Msys2 and MinGW.
+
+First setup the environment
 
 ``` bash
-env GOOS=<YOUR SELECTION> GOARCH=<GOARCH>
+# enable CGO compiling
+export CGO_ENABLED=1
+
+# configure destination
+export GOOS=windows
+export GOARCH=amd64
+```
+
+then build
+
+``` bash
+/c/Program\ Files/Go/bin/go.exe build -o libkagome_win.dll -buildmode=c-shared kagome.go
+```
+
+### Compile for android
+
+For android an Android NDK install is necessary.
+
+``` bash
+# path to your android NDK for cross compilation
+export NDK=<PATH-TO-NDK>
+
+# enable CGO compiling
+export CGO_ENABLED=1
+
+# select one of the following
+# x86 64bit (emulator)
+export GOOS=android
+export GOARCH=amd64
+export CC=$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android21-clang
+
+# x86 32bit (emulator)
+export GOOS=android
+export GOARCH=386
+export CC=$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android21-clang
+
+# arm 64bit
+export GOOS=android
+export GOARCH=arm64
+export CC=$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang
+
+# arm 32bit
+export GOOS=android
+export GOARCH=arm
+export CC=$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi21-clang
 ```
 
 Then build your lib by calling:
 
 ``` bash
-go build -o libkagome<your_extension> -buildmode=c-shared kagome.go
+go build -o libkagome_droid_$GOARCH.so -buildmode=c-shared kagome.go
 ```
 
 ## Additional information
