@@ -9,7 +9,7 @@ This package enables the use of kagome from dart.
 platform support:
 | Windows | MacOS | Linux | iOS | Android | web |
 | :------: | :------: | :------: | :------: | :------: | :------: |
-|     ✅  |        |       |        |   ✅   |    see https://github.com/CaptainDario/kagome_dart/issues/1    |
+|     ✅  |        |       |        |   ✅   |    see [#1](https://github.com/CaptainDario/kagome_dart/issues/1)    |
 
 ## Getting started
 
