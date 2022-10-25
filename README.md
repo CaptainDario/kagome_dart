@@ -61,6 +61,7 @@ Copy and rename the android libraries to the matching folder in `android/app/src
 Usage of this package is fairly simpe as it only provides the two top level function `analyze` and `wakati` from kagome.
 
 ``` dart
+import 'package:flutter/cupertino.dart';
 import 'package:kagome_dart/kagome_dart.dart';
 
 import 'package:tuple/tuple.dart';
@@ -70,28 +71,29 @@ import 'package:tuple/tuple.dart';
 void main() {
 
   String input = "日本経済新聞";
-  showVersion();
+  Kagome kagome = Kagome();
+  kagome.showVersion();
 
   // important to call before any other methods
-  initTokenizer();
+  kagome.initTokenizer();
 
-  // create space in input
-  List w = runWakati(input);
+  // create spaces in input
+  List w = kagome.runWakati(input);
   for (var i = 0; i < w.length; i++) {
-    print(w[i]);
+    debugPrint(w[i]);
   }
 
   // analyze and create spaces
   Tuple2<List<String>, List<List<String>>> t = 
-    runAnalyzer(input, AnalyzeModes.search);
+    kagome.runAnalyzer(input, AnalyzeModes.search);
   for (var i = 0; i < t.item1.length; i++) {
-    print("${t.item1[i]} \t ${t.item2[i]}");
+    debugPrint("${t.item1[i]} \t ${t.item2[i]}");
   }
   
-  t = runAnalyzer(input, AnalyzeModes.normal);
-  print(t);
+  t = kagome.runAnalyzer(input, AnalyzeModes.normal);
+  debugPrint(t.toString());
 
-  destroyTokenizer();
+  kagome.destroyTokenizer();
 }
 ```
 
