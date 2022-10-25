@@ -1,9 +1,10 @@
 import 'dart:io';
 
+import 'package:ffi/ffi.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:tuple/tuple.dart';
 import 'dart:ffi' as ffi; // For FFI
 import 'dart:ffi';
-import 'package:ffi/src/utf8.dart';
 
 
 
@@ -76,7 +77,7 @@ class Kagome {
 
   /// Loads the kagome C-Lib matching the current platform
   void loadDynamicLibrary(){
-    print(Directory(Platform.resolvedExecutable).path);
+    debugPrint(Directory(Platform.resolvedExecutable).path);
 
     if (Platform.isAndroid) {
       _lib = DynamicLibrary.open('libkagome_droid.so');
@@ -109,7 +110,7 @@ class Kagome {
   /// as delimiter
   String _sanitizeInput(String input){
     if(input.contains("█")){
-      print("█ is not allowed in the input string");
+      debugPrint("█ is not allowed in the input string");
     }
 
     return input.replaceAll("█", " ");
