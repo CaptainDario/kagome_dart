@@ -14,7 +14,7 @@ void main() {
   // important to call before any other methods
   kagome.initTokenizer();
 
-  // create space in input
+  // create spaces in input
   List w = kagome.runWakati(input);
   for (var i = 0; i < w.length; i++) {
     debugPrint(w[i]);
