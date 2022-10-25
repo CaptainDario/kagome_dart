@@ -8,7 +8,7 @@ import (
 	"runtime/debug"
 	"strings"
 
-	"github.com/ikawaha/kagome-dict/ipa"
+	"github.com/ikawaha/kagome-dict/uni"
 	"github.com/ikawaha/kagome/v2/tokenizer"
 )
 
@@ -46,7 +46,7 @@ func ShowVersion() {
 //export InitTokenizer
 func InitTokenizer() {
 	
-	tokenizer, err := tokenizer.New(ipa.Dict(), tokenizer.OmitBosEos())
+	tokenizer, err := tokenizer.New(uni.Dict(), tokenizer.OmitBosEos())
 	if err != nil {
 		panic(err)
 	}
