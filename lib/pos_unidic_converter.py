@@ -11,23 +11,23 @@ if __name__ == "__main__":
     with open("pos_unidic.dart", mode="w+", encoding="utf8") as f:
         # write the enum with all POS elements (english names)
         f.write("\n\n\n///Contains")
-        f.write("\nenum posUnidic {\n")
+        f.write("\nenum PosUnidic {\n")
         for pos in pos_table:
             f.write(f"\t{pos[1].replace('.', '_')},\n")
         f.write("}\n\n")
 
         # write the map to convert kagome output to pos enum
         f.write("///Convert a kagome output string (japanese) to an pos enum instance\n")
-        f.write("\nMap<String, posUnidic> jpToposUnidic = {\n")
+        f.write("\nMap<String, PosUnidic> jpToPosUnidic = {\n")
         for pos in pos_table:
-            f.write(f"\t'{pos[0]}' : posUnidic.{pos[1].replace('.', '_')},\n")
+            f.write(f"\t'{pos[0]}' : PosUnidic.{pos[1].replace('.', '_')},\n")
         f.write("};\n\n")
         
         # write the map to convert japanese pos string to pos enum
         f.write("///Convert a kagome output string (english) to an pos enum instance\n")
-        f.write("Map<String, posUnidic> enToposUnidic = {\n")
+        f.write("Map<String, PosUnidic> enToPosUnidic = {\n")
         for pos in pos_table:
-            f.write(f"\t'{pos[1]}' : posUnidic.{pos[1].replace('.', '_')},\n")
+            f.write(f"\t'{pos[1]}' : PosUnidic.{pos[1].replace('.', '_')},\n")
         f.write("};\n\n")
 
         # write the map to convert japanese <-> english pos
@@ -39,21 +39,21 @@ if __name__ == "__main__":
 
         # write the map to convert pos enum to en
         f.write("///Convert pos enum to en\n")
-        f.write("Map<posUnidic, String> posToEn = {\n")
+        f.write("Map<PosUnidic, String> posToEn = {\n")
         for pos in pos_table:
-            f.write(f"\tposUnidic.{pos[1].replace('.', '_')} : '{pos[1]}',\n")
+            f.write(f"\tPosUnidic.{pos[1].replace('.', '_')} : '{pos[1]}',\n")
         f.write("};\n\n")
 
         # write the map to convert pos enum to jp
         f.write("///Convert pos enum to jp\n")
-        f.write("Map<posUnidic, String> posToJp = {\n")
+        f.write("Map<PosUnidic, String> posToJp = {\n")
         for pos in pos_table:
-            f.write(f"\tposUnidic.{pos[1].replace('.', '_')} : '{pos[0]}',\n")
+            f.write(f"\tPosUnidic.{pos[1].replace('.', '_')} : '{pos[0]}',\n")
         f.write("};\n\n")
 
         # write the map to convert pos enum to description
         f.write("///Convert pos enum to jp\n")
-        f.write("Map<posUnidic, String> posToDesc = {\n")
+        f.write("Map<PosUnidic, String> posToDesc = {\n")
         for pos in pos_table:
-            f.write(f"\tposUnidic.{pos[1].replace('.', '_')} : '{pos[2]}',\n")
+            f.write(f"\tPosUnidic.{pos[1].replace('.', '_')} : '{pos[2].replace('(', ' (')}',\n")
         f.write("};\n\n")
