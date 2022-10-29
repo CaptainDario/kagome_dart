@@ -136,10 +136,10 @@ class Kagome {
       mode.toString().split('.').last.toNativeUtf8()
     ).toDartString();
 
-    var s = analyzerOut.split("███");
-    var s_1 = s[1].split("██");
+    List<String> s = analyzerOut.split("███");
+    List<String> s_1 = s[1].split("██");
 
-    var ret = Tuple2(
+    Tuple2<List<String>, List<List<String>>> ret = Tuple2(
       s[0].split("██"),
       List.generate(s_1.length,
         (index) => s_1[index].split("█")
