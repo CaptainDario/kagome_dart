@@ -9,7 +9,7 @@ This package enables the use of kagome from dart.
 platform support:
 | Windows | MacOS | Linux | iOS | Android | web |
 | :------: | :------: | :------: | :------: | :------: | :------: |
-|     ✅  |        |       |        |   ✅   |    see [#1](https://github.com/CaptainDario/kagome_dart/issues/1)    |
+|     ✅  |    ✅   |       |    ✅   |   ✅   |    see [#1](https://github.com/CaptainDario/kagome_dart/issues/1)    |
 
 ## Getting started
 
@@ -55,6 +55,12 @@ Copy and rename the android libraries to the matching folder in `android/app/src
 `libkagome_droid_arm.so` -> `armeabi-v7a/libkagome_droid.so`,
 
 `libkagome_droid_arm64.so` -> `arm64-v8a/libkagome_droid.so`
+
+### MacOS
+
+Add the MacOS .dylib to your xcode-project as a bundle resource:
+
+Runner -> Build Phases -> Copy Bundle Resources
 
 ## Usage
 
@@ -106,7 +112,7 @@ First you need to clone the kagome repo to have access to the source.
 git clone https://github.com/ikawaha/kagome
 ```
 
-Then copy the overwrite kagome's `kagome.go` with the `kagome.go` of this repository.
+Then copy and overwrite kagome's `kagome.go` with the `kagome.go` of this repository. Additionally, copy the MAKE-file.
 
 Cross compiling is possible with go, by setting some environment variables.
 The supported platforms can be seen by calling `go.exe tool dist list`
@@ -130,6 +136,30 @@ then build
 
 ``` bash
 /c/Program\ Files/Go/bin/go.exe build -o libkagome_win.dll -buildmode=c-shared kagome.go
+```
+
+### Compile for MacOS
+
+First setup the environment
+
+``` bash
+# enable CGO compiling
+export CGO_ENABLED=1
+
+# configure destination (intel mac)
+export GOOS=darwin
+export GOARCH=amd64
+
+# configure destination (m1 mac)
+export GOOS=darwin
+export GOARCH=arm64
+
+```
+
+then build
+
+``` bash
+go build -o libkagome_mac.dylib -buildmode=c-shared kagome.go
 ```
 
 ### Compile for android
