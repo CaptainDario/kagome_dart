@@ -88,7 +88,7 @@ class Kagome {
     else if (Platform.isMacOS) {
 
       _lib = DynamicLibrary.open(
-        "${Directory(Platform.resolvedExecutable).parent.path}/blobs/libkagome_mac.dylib"
+        "${Directory(Platform.resolvedExecutable).parent.parent.path}/Resources/libkagome_mac.dylib"
       );
     }
     else if (Platform.isLinux) {
