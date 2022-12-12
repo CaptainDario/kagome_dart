@@ -44,6 +44,16 @@ install(
 )
 ```
 
+### Linux
+
+TODO
+
+### MacOS
+
+Add the MacOS .dylib to your xcode-project as a bundle resource:
+
+Runner -> Build Phases -> Copy Bundle Resources
+
 ### Android
 
 Copy and rename the android libraries to the matching folder in `android/app/src/main/jniLibs`
@@ -56,11 +66,11 @@ Copy and rename the android libraries to the matching folder in `android/app/src
 
 `libkagome_droid_arm64.so` -> `arm64-v8a/libkagome_droid.so`
 
-### MacOS
+### iOS
 
-Add the MacOS .dylib to your xcode-project as a bundle resource:
+The setup for iOS is a bit more involved and follows the steps detailed [in this SO thread](https://stackoverflow.com/questions/69214595/how-to-manually-add-a-xcframework-to-a-flutter-ios-plugin)
 
-Runner -> Build Phases -> Copy Bundle Resources
+TODO: add instructions from SO here
 
 ## Usage
 
@@ -106,15 +116,15 @@ void main() {
 ## Compiling kagome yourself
 
 This could be helpful if you want to use a different dictionary.
-First you need to clone the kagome repo to have access to the source.
+First you need to clone the kagome repo to have access to the source (inside the repo of kagome_dart).
 
 ```bash
 git clone https://github.com/ikawaha/kagome
 ```
 
-Then copy and overwrite kagome's `kagome.go` with the `kagome.go` of this repository. Additionally, copy the MAKE-file.
+Then copy and overwrite kagome's `kagome.go` with the `kagome.go` of this repository.
 
-Cross compiling is possible with go, by setting some environment variables.
+(Cross) Compiling to C is possible with cgo, by setting some environment variables.
 The supported platforms can be seen by calling `go.exe tool dist list`
 
 ### Compile for Windows
@@ -124,11 +134,19 @@ The supported platforms can be seen by calling `go.exe tool dist list`
 First setup the environment
 
 ``` bash
+make windows
 ```
 
 ### Compile for MacOS
 
 ``` bash
+make mac
+```
+
+### Compile for Linux
+
+``` bash
+make linux
 ```
 
 ### Compile for android
@@ -138,36 +156,12 @@ For android an Android NDK install is necessary.
 ``` bash
 # path to your android NDK for cross compilation
 export NDK=<PATH-TO-NDK>
-
-# enable CGO compiling
-export CGO_ENABLED=1
-
-# select one of the following
-# x86 64bit (emulator)
-export GOOS=android
-export GOARCH=amd64
-export CC=$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android21-clang
-
-# x86 32bit (emulator)
-export GOOS=android
-export GOARCH=386
-export CC=$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android21-clang
-
-# arm 64bit
-export GOOS=android
-export GOARCH=arm64
-export CC=$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang
-
-# arm 32bit
-export GOOS=android
-export GOARCH=arm
-export CC=$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi21-clang
 ```
 
-Then build your lib by calling:
+With this kagome can be build by calling
 
 ``` bash
-go build -o libkagome_droid_$GOARCH.so -buildmode=c-shared kagome.go
+make android
 ```
 
 ## Additional information
