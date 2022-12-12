@@ -71,12 +71,40 @@ macos: macos-x86_64 macos-arm64 macos-universal
 
 
 # ANDROID
-android:
+android-amd64:
 	cd kagome; \
 	CGO_ENABLED=1 \
 	GOOS=android \
 	GOARCH=amd64 \
-	
+	CC=$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android21-clang \
+	go build -buildmode=c-shared kagome.go -o $(OUT)/android/libkagome_droid_$GOARCH.so
+
+android-amd32:
+	cd kagome; \
+	CGO_ENABLED=1 \
+	GOOS=android \
+	GOARCH=amd32 \
+	CC=$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android21-clang \
+	go build -buildmode=c-shared kagome.go -o $(OUT)/android/libkagome_droid_$GOARCH.so
+
+android-arm64:
+	cd kagome; \
+	CGO_ENABLED=1 \
+	GOOS=android \
+	GOARCH=arm64 \
+	CC=$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang \
+	go build -buildmode=c-shared kagome.go -o $(OUT)/android/libkagome_droid_$GOARCH.so
+
+android-arm32:
+	cd kagome; \
+	CGO_ENABLED=1 \
+	GOOS=android \
+	GOARCH=arm32 \
+	CC=$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi21-clang \
+	go build -buildmode=c-shared kagome.go -o $(OUT)/android/libkagome_droid_$GOARCH.so
+
+android: android-amd32 android-amd64 android-arm32 android-arm64
+
 
 # IOS
 ios-arm64:
@@ -110,3 +138,10 @@ ios-universal: ios-arm64 simulator-x86_64
 		-output $(OUT)/ios/libkagome_ios.xcframework
 
 ios: ios-universal
+
+
+wasm:
+	cd kagome; \
+	GOOS=js \
+	GOARCH=wasm \
+	go build -o $(OUT)/wasm/libkagome.wasm
