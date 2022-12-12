@@ -124,42 +124,11 @@ The supported platforms can be seen by calling `go.exe tool dist list`
 First setup the environment
 
 ``` bash
-# enable CGO compiling
-export CGO_ENABLED=1
-
-# configure destination
-export GOOS=windows
-export GOARCH=amd64
-```
-
-then build
-
-``` bash
-/c/Program\ Files/Go/bin/go.exe build -o libkagome_win.dll -buildmode=c-shared kagome.go
 ```
 
 ### Compile for MacOS
 
-First setup the environment
-
 ``` bash
-# enable CGO compiling
-export CGO_ENABLED=1
-
-# configure destination (intel mac)
-export GOOS=darwin
-export GOARCH=amd64
-
-# configure destination (m1 mac)
-export GOOS=darwin
-export GOARCH=arm64
-
-```
-
-then build
-
-``` bash
-go build -o libkagome_mac.dylib -buildmode=c-shared kagome.go
 ```
 
 ### Compile for android
