@@ -89,23 +89,23 @@ ios-arm64:
 	CGO_CFLAGS="-fembed-bitcode" \
 	go build -buildmode=c-archive -tags ios -o $(OUT)/ios/libkagome_ios_arm64.a kagome.go
 
-ios-x86_64:
+simulator-x86_64:
 	cd kagome; \
 	CGO_ENABLED=1 \
 	GOOS=ios \
 	GOARCH=amd64 \
 	SDK=iphonesimulator \
 	CC=$(PWD)/clangwrap.sh \
-	go build -buildmode=c-archive -tags ios -o $(OUT)/ios/libkagome_ios_x86_64.a kagome.go
+	go build -buildmode=c-archive -tags ios -o $(OUT)/ios/libkagome_simulator_x86_64.a kagome.go
 
-ios-universal: ios-arm64 ios-x86_64
+ios-universal: ios-arm64 simulator-x86_64
 	cd kagome; \
 	lipo \
-		$(OUT)/ios/libkagome_ios_x86_64.a \
-		$(OUT)/ios/libkagome_ios_arm64.a \
-		-create -output $(OUT)/ios/libkagome_ios.a; \
+		$(OUT)/ios/libkagome_simulator_x86_64.a \
+		$(OUT)/ios/libkagome_simulator_arm64.a \
+		-create -output $(OUT)/ios/libkagome_simulator.a; \
 	xcodebuild -create-xcframework \
-		-library $(OUT)/ios/libkagome_ios_x86_64.a \
+		-library $(OUT)/ios/libkagome_simulator_x86_64.a \
 		-library $(OUT)/ios/libkagome_ios_arm64.a \
 		-output $(OUT)/ios/libkagome_ios.xcframework
 
