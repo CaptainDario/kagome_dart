@@ -80,7 +80,7 @@ class Kagome {
     debugPrint(Directory(Platform.resolvedExecutable).path);
 
     if (Platform.isAndroid) {
-      _lib = DynamicLibrary.open('libkagome_droid.so');
+      _lib = DynamicLibrary.open('kagome_dart_droid.so');
     }
     else if (Platform.isIOS) {
       _lib = DynamicLibrary.process();
@@ -88,17 +88,17 @@ class Kagome {
     else if (Platform.isMacOS) {
 
       _lib = DynamicLibrary.open(
-        "${Directory(Platform.resolvedExecutable).parent.parent.path}/Resources/libkagome_mac.dylib"
+        "${Directory(Platform.resolvedExecutable).parent.parent.path}/Resources/kagome_dart_mac.dylib"
       );
     }
     else if (Platform.isLinux) {
       _lib = DynamicLibrary.open(
-        "${Directory(Platform.resolvedExecutable).parent.path}/blobs/libkagome_lin.so"
+        "${Directory(Platform.resolvedExecutable).parent.path}/blobs/kagome_dart_lin.so"
       );
     }
     else if (Platform.isWindows) {
       _lib = DynamicLibrary.open(
-        "${Directory(Platform.resolvedExecutable).parent.path}/blobs/libkagome_win.dll"
+        "${Directory(Platform.resolvedExecutable).parent.path}/blobs/kagome_dart_win.dll"
       );
     }
     else {
