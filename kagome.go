@@ -93,8 +93,21 @@ func RunAnalyzer(input *C.char, mode *C.char) *C.char {
 	tokens := globalTokenizer.Analyze(C.GoString(input), tokenizer.TokenizeMode(analyzeMode))
 	surfaceOut, featuresOut := "", ""
 	for i, token := range tokens {
-		features := strings.Join(token.Features(), "█")
-			
+		features := ""
+
+		// join the features together
+		for j, t := range token.Features() {
+			// if the feature is not empty 
+			if (t != "") {
+				features += t
+			} else {
+				features += " "
+			}
+			if (j < len(token.Features()) - 1){
+				features += "█"
+			}
+		}
+
 		surfaceOut  += token.Surface
 		featuresOut += features
 		
@@ -106,4 +119,35 @@ func RunAnalyzer(input *C.char, mode *C.char) *C.char {
 	return C.CString(surfaceOut + "███" + featuresOut)
 }
 
-func main() {}
+func main() {
+	InitTokenizer()
+	tokens := globalTokenizer.Analyze("、", tokenizer.TokenizeMode(2))
+	surfaceOut, featuresOut := "", ""
+
+	for i, token := range tokens {
+		features := ""
+
+		// join the features together
+		for j, t := range token.Features() {
+			// if the feature is not empty 
+			if (t != "") {
+				features += t
+			} else {
+				features += " "
+			}
+			if (j < len(token.Features()) - 1){
+				features += "█"
+			}
+		}
+
+		surfaceOut  += token.Surface
+		featuresOut += features
+		
+		if(len(tokens)-1 > i){
+			surfaceOut  += "██"
+			featuresOut += "██"
+		}
+	}
+
+	print(surfaceOut + "███" + featuresOut)
+}
