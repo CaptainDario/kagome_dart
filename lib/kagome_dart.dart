@@ -63,13 +63,9 @@ class Kagome {
     loadDynamicLibrary();
 
     showVersion = _lib.lookup<NativeFunction<ShowVersionFunc>>('ShowVersion').asFunction();
-
     initTokenizer = _lib.lookup<NativeFunction<InitTokenizerFunc>>('InitTokenizer').asFunction();
-    
     destroyTokenizer = _lib.lookup<NativeFunction<DestroyTokenizerFunc>>('DestroyTokenizer').asFunction();
-
     _runAnalyzer = _lib.lookup<ffi.NativeFunction<RunAnalyzerFunc>>('RunAnalyzer').asFunction();
-
     _runWakati = _lib.lookup<ffi.NativeFunction<RunWakatiFunc>>('RunWakati').asFunction();
 
     initTokenizer();
