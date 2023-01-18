@@ -9,7 +9,7 @@ This package enables the use of kagome from dart.
 platform support:
 | Windows | MacOS | Linux | iOS | Android | web |
 | :------: | :------: | :------: | :------: | :------: | :------: |
-|     ✅  |    ✅   |       |    ✅   |   ✅   |    see [#1](https://github.com/CaptainDario/kagome_dart/issues/1)    |
+|     ✅  |    ✅   |       |   🚧[#3](https://github.com/CaptainDario/kagome_dart/issues/3)   |   ✅   |    see [#1](https://github.com/CaptainDario/kagome_dart/issues/1)    |
 
 ## Getting started
 
@@ -122,7 +122,7 @@ First you need to clone the kagome repo to have access to the source (inside the
 git clone https://github.com/ikawaha/kagome
 ```
 
-Then copy and overwrite kagome's `kagome.go` with the `kagome.go` of this repository.
+Then copy and overwrite `kagome.go` in kagome's repository with the `kagome.go` of kagome_dart.
 
 (Cross) Compiling to C is possible with cgo, by setting some environment variables.
 The supported platforms can be seen by calling `go.exe tool dist list`
@@ -130,8 +130,6 @@ The supported platforms can be seen by calling `go.exe tool dist list`
 ### Compile for Windows
 
 **Note:** I only had success building on Windows using Msys2 and MinGW.
-
-First setup the environment
 
 ``` bash
 make windows
