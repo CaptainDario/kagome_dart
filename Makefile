@@ -112,44 +112,31 @@ android: android-amd32 android-amd64 android-arm32 android-arm64
 ios-arm64:
 	cd kagome; \
 	CGO_ENABLED=1 \
-	GOOS=darwin \
+	GOOS=ios \
 	GOARCH=arm64 \
 	SDK=iphoneos \
 	CC=$(PWD)/clangwrap.sh \
 	CGO_CFLAGS="-fembed-bitcode" \
-	go build -buildmode=c-archive -o ../$(OUT)/ios/kagome_dart_ios_arm64.a kagome.go
-
-simulator-arm64:
-	cd kagome; \
-	CGO_ENABLED=1 \
-	GOOS=darwin \
-	GOARCH=arm64 \
-	SDK=iphonesimulator \
-	CGO_CFLAGS="-fembed-bitcode" \
-	CC=$(PWD)/clangwrap.sh \
-	go build -buildmode=c-archive -o ../$(OUT)/ios/kagome_dart_simulator_arm64.a kagome.go
+	go build -buildmode=c-archive -tags ios -o ../$(OUT)/ios/ios/arm64/libkagome_dart.a kagome.go
 
 simulator-x86_64:
 	cd kagome; \
 	CGO_ENABLED=1 \
-	GOOS=darwin \
+	GOOS=ios \
 	GOARCH=amd64 \
 	SDK=iphonesimulator \
-	CGO_CFLAGS="-fembed-bitcode" \
 	CC=$(PWD)/clangwrap.sh \
-	go build -buildmode=c-archive -o ../$(OUT)/ios/kagome_dart_simulator_x86_64.a kagome.go
+	go build -buildmode=c-archive -tags ios -o ../$(OUT)/ios/simulator/x86_64/libkagome_dart.a kagome.go
 
 ios-universal: ios-arm64 simulator-x86_64
 	cd kagome; \
-	lipo \
-		../$(OUT)/ios/kagome_dart_simulator_x86_64.a \
-		../$(OUT)/ios/kagome_dart_simulator_arm64.a \
-		-create -output ../$(OUT)/ios/kagome_dart_simulator.a; \
 
 	xcodebuild -create-xcframework \
-		-library $(OUT)/ios/kagome_dart_simulator_arm64.a \
-		-library $(OUT)/ios/kagome_dart_ios_arm64.a \
-		-output  $(OUT)/ios/kagome_dart.xcframework
+		-library $(OUT)/ios/simulator/x86_64/libkagome_dart.a \
+		-headers $(OUT)/ios/simulator/x86_64/libkagome_dart.h \
+		-library $(OUT)/ios/ios/arm64/libkagome_dart.a \
+		-headers $(OUT)/ios/ios/arm64/libkagome_dart.h \
+		-output  $(OUT)/ios/libkagome_dart.xcframework
 
 ios: ios-universal
 
