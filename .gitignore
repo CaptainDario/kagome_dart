@@ -53,3 +53,6 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
+
+# ignore kagome builds in ios folder
+ios/*.xcframework
